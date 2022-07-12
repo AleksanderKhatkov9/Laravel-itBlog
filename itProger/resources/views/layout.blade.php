@@ -17,14 +17,15 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 </head>
-<body class="">
-<div
-    class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark  text-white border-bottom shadow-sm">
+
+<body>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark  text-white border-bottom shadow-sm">
 
     <h5 class="my-0 mr-md-auto font-weight-normal">
-        <a href="http://127.0.0.1:8000">itBlog</a>
+        <a href="/">
+            <img src="{{asset('storage/images/blog.jpg') }}"
+                 style="width: 100px; height: 50px; margin-right: 50px;"></a>
     </h5>
-
 
     <form class="" style="display: flex;">
         <input type="search" class="form-control form-control-dark" name="val" id="val" placeholder="&#128270;"
@@ -36,13 +37,14 @@
 
 
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-white" href="/">НОВОСТИ</a>
-{{--        <a class="p-2 text-white" href="/about">О нас</a>--}}
-        <a class="p-2 text-white" href="/add_news">ДОБАВИТЬ</a>
+        {{--        <a class="p-2 text-white" href="/">НОВОСТИ</a>--}}
+        <a class="p-2 text-white" data-toggle="pill" href="/">НОВОСТИ</a>
+        <a class="p-2 text-white" href="/add">ДОБАВИТЬ</a>
         <a class="btn btn-outline-warning" href="/auth">Вход</a>
     </nav>
     <a class="btn btn-outline-warning" href="/review">Отзовы</a>
 </div>
+
 
 <div class="container">
     @yield('main_content')

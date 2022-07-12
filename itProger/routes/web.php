@@ -14,15 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
 Route::get('/',"App\Http\Controllers\Comment@home")->name('post');
-//Route::get('/about',"App\Http\Controllers\Comment@about");
 Route::get('/review',"App\Http\Controllers\Comment@review")->name('review');
 Route::post('/review/check',"App\Http\Controllers\Comment@review_check");
 Route::get('/auth',"App\Http\Controllers\Comment@auth");
-Route::get('/add_news',"App\Http\Controllers\NewsController@add_news");
-Route::post('/news/save',"App\Http\Controllers\NewsController@save_news");
+Route::get('/add',"App\Http\Controllers\NewsController@index");
+Route::post('/news/save',"App\Http\Controllers\NewsController@create");
 Route::get('/article',"App\Http\Controllers\NewsController@article")->name('post');
+
+Route::post('/news/update',"App\Http\Controllers\NewsController@update");
 
 
 

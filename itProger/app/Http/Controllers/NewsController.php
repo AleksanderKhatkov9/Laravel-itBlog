@@ -8,18 +8,30 @@ use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
+    /**
+     * Отображает список ресурсов
+     *
+     * @return \Illuminate\Http\Response
+     */
 
-    public function add_news()
+    public function index()
     {
         return view('news');
     }
 
-    public function save_news(Request $request)
+
+    /**
+     * Выводит форму для создания нового ресурса
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function create(Request $request)
     {
-        $valid = $request->validate([
+        $request->validate([
             'title' => 'required|min:4|max:500',
             'description' => 'required|min:15|max:500',
-//            'content' => 'required|min:15|max:1000',
+            'content' => 'required|min:15|max:1000',
         ]);
 
 
@@ -49,17 +61,6 @@ class NewsController extends Controller
         $news->date = $request->input('date');
         $news->save();
 
-
-//        return view('/home');
-
-//        $file = $request->input('file');
-//        $title = $request->input('title');
-//        $description = $request->input('description');
-//        $content = $request->input('content');
-//        $date = $request->input('date');
-//        $data=array('file'=>$file,"title"=>$title,"description"=>$description,"content"=>$content, "date"=>$date);
-//        DB::table('news')->insert($data);
-
         return redirect()->route('home');
     }
 
@@ -70,19 +71,36 @@ class NewsController extends Controller
             $id = $_GET['id'];
             $post = DB::select('select * from news where id =:id', ['id' => $id]);
         }
-
         return view('article', ['post' => $post]);
     }
 
 
-    public function update(Request $request){
+    /**
+     * Обновляет указанный ресурс в хранилище
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
 
 
+    public function update(Request $request)
+    {
+
+        $validatedData = $request->validate([
+            'title' => 'required|min:4|max:500',
+            'description' => 'required|min:15|max:500',
+            'content' => 'required|min:15|max:1000',
+        ]);
+
+        $post = new News();
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            News::whereId($id)->update($validatedData);
+        }
 
 
+        return redirect()->route('home');
     }
-
-
 
 
 }

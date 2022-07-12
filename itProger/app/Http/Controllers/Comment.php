@@ -46,7 +46,6 @@ class Comment extends Controller
         return redirect()->route('review');
     }
 
-
     public function auth(){
         return view('auth');
     }
